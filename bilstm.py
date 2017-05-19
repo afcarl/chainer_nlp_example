@@ -91,3 +91,6 @@ if __name__ == '__main__':
     bilstm = FastBiLSTM(n_vocab=50)
     h_vecs = bilstm(x_list)
     print h_vecs
+    
+    for h in h_vecs:
+        print h.data.shape
