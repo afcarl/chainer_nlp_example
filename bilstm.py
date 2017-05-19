@@ -85,7 +85,9 @@ class FastBiLSTM(chainer.Chain):
 
 
 if __name__ == '__main__':
-    x = np.array([[0, 1, 2, 3], [4, 5, 6], [7, 8]], dtype=np.int32)
+    x_list = [[0, 1, 2, 3], [4, 5, 6], [7, 8]]
+    x_list = [np.array(x, dtype=np.int32) for x in x_list]
+    
     bilstm = FastBiLSTM(n_vocab=50)
     h_vecs = bilstm(x)
     print h_vecs
