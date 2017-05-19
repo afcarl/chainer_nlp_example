@@ -89,5 +89,5 @@ if __name__ == '__main__':
     x_list = [np.array(x, dtype=np.int32) for x in x_list]
     
     bilstm = FastBiLSTM(n_vocab=50)
-    h_vecs = bilstm(x)
+    h_vecs = bilstm(x_list)
     print h_vecs
