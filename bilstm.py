@@ -15,12 +15,6 @@ import chainer.links as L
 import math
 from chainer import initializers
 
-import util
-from util import PADDING, UNKWORD
-
-from biaffine import Biaffine as BiaffineLink
-from decode_tree import parse_argmax, decode_one, decode_batch
-
 import six
 
 class FastBiLSTM(chainer.Chain):
