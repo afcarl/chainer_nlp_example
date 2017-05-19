@@ -58,7 +58,7 @@ class FastBiLSTM(chainer.Chain):
         xs_f = []
         for i, x in enumerate(x_data):
             # _x = self.xp.array(x, dtype=self.xp.int32)
-            x = Variable(_x, volatile=not self.train)
+            x = Variable(x, volatile=not self.train)
             x = self.word_embed(x)
             x = F.dropout(x, ratio=self.use_dropout, train=self.train)
             xs_f.append(x)
@@ -79,3 +79,10 @@ if __name__ == '__main__':
     
     for h in h_vecs:
         print h.data.shape
+    #    
+    #     [<variable at 0x10996f990>, <variable at 0x10996fa50>, <variable at 0x10996fb90>]
+    #     (4, 400)
+    #     (3, 400)
+    #     (2, 400)
+
+    #     
