@@ -58,29 +58,14 @@ class FastBiLSTM(chainer.Chain):
         xs_f = []
         for i, x in enumerate(x_data):
             # _x = self.xp.array(x, dtype=self.xp.int32)
-            _x = x
-            _x = Variable(_x, volatile=not self.train)
-            _x = self.word_embed(_x)
-            if self.n_pos:
-                pos_vec = self.pos_embed(add_pos[i])
-                _x = F.concat([_x, pos_vec], axis=1)
-            _x = F.dropout(_x, ratio=self.use_dropout, train=self.train)
-            x_f = _x
-            xs_f.append(x_f)
+            x = Variable(_x, volatile=not self.train)
+            x = self.word_embed(x)
+            x = F.dropout(x, ratio=self.use_dropout, train=self.train)
+            xs_f.append(x)
 
         _hy_f, _cy_f, ys_f = self.bi_lstm(hx=hx, cx=cx, xs=xs_f,
                                           train=self.train)
-
-        if add_h is not None:
-            # BIO vectors
-            ys = [F.dropout(F.concat([_f, add_h[i]]),
-                            ratio=self.use_dropout, train=self.train)
-                  for i, (_f) in enumerate(ys_f)]
-        else:
-            ys = [F.dropout(_f, ratio=self.use_dropout, train=self.train)
-                  for i, _f in enumerate(ys_f)]
-
-        return ys
+        return ys_f
 
 
 
